@@ -4,12 +4,21 @@ const path = require("path");
 
 let tray = null;
 function createWindow() {
-  tray = new Tray("./assets/logo.png");
+  //TODO: FIX TRAY
+  tray = new Tray(path.join(__dirname, "/assets/logo.png"));
   const contextMenu = Menu.buildFromTemplate([
-    { label: app.name },
+    { label: "pusheen" },
     { type: "separator" },
     { label: "Time", type: "radio", checked: true },
-    { label: "Weather", type: "radio" },
+    //{ label: "Weather", type: "radio" },
+    { type: "separator" },
+    {
+      label: "Quit",
+      click: function () {
+        mainWindow.destroy();
+        app.quit();
+      },
+    },
   ]);
   tray.setToolTip("Look! Pusheen!");
   tray.setContextMenu(contextMenu);
