@@ -2,6 +2,8 @@ var speechBubble = document.getElementById("speech-bubble");
 var pusheenImg = document.getElementById("pusheen");
 var imgBasePath = "./assets/pusheens/time/";
 
+const fs = require("fs");
+
 // first tick
 tick_fast();
 tick_long();
@@ -38,20 +40,18 @@ function getPusheenByTimeOfDay() {
   //TODO: FIX THIS SHIT
   if (currentHour >= 6 && currentHour < 12) {
     path = "morning";
-    rand = Math.round(Math.random()) + 1;
   } else if (currentHour >= 12 && currentHour < 14) {
     path = "lunch";
-    rand = Math.round(Math.random() * 3) + 1;
   } else if (currentHour >= 14 && currentHour < 19) {
     path = "morning";
-    rand = Math.round(Math.random()) + 1;
   } else if (currentHour >= 19 && currentHour < 23) {
     path = "evening";
-    rand = Math.round(Math.random() * 2) + 1;
   } else {
     path = "night";
-    rand = Math.round(Math.random() * 3) + 1;
   }
 
+  rand = Math.round(
+    Math.random() * (fs.readdirSync(imgBasePath + path).length - 1)
+  );
   return path + "/" + path + "_" + rand + ".gif";
 }

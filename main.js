@@ -29,6 +29,7 @@ function createMainWindow() {
         if (!weatherWindow) {
           weatherWindow = createBrowserWindow();
           weatherWindow.loadFile("./views/weather.html");
+          //weatherWindow.webContents.openDevTools();
         } else {
           if (weatherWindow.isVisible()) {
             weatherWindow.hide();
@@ -88,7 +89,7 @@ function createBrowserWindow() {
     width: 256,
     height: 128,
     webPreferences: {
-      preload: path.join(__dirname, "preload.js"),
+      nodeIntegration: true,
     },
     frame: false,
     transparent: true,
