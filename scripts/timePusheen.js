@@ -37,14 +37,13 @@ function getPusheenByTimeOfDay() {
   const currentHour = new Date().getHours();
   let path = "";
   let rand;
-  //TODO: FIX THIS SHIT
   if (currentHour >= 6 && currentHour < 12) {
     path = "morning";
   } else if (currentHour >= 12 && currentHour < 14) {
     path = "lunch";
-  } else if (currentHour >= 14 && currentHour < 19) {
+  } else if (currentHour >= 14 && currentHour < 18) {
     path = "morning";
-  } else if (currentHour >= 19 && currentHour < 23) {
+  } else if (currentHour >= 18 && currentHour < 23) {
     path = "evening";
   } else {
     path = "night";
