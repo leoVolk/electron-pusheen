@@ -2,5 +2,22 @@
     "cSpell.ignoreWords": [
         "pusheen",
         "pusheens"
-    ]
+    ],
+    "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#72b3b7",
+        "activityBar.activeBorder": "#f4eaf4",
+        "activityBar.background": "#72b3b7",
+        "activityBar.foreground": "#15202b",
+        "activityBar.inactiveForeground": "#15202b99",
+        "activityBarBadge.background": "#f4eaf4",
+        "activityBarBadge.foreground": "#15202b",
+        "statusBar.background": "#539ea3",
+        "statusBar.foreground": "#15202b",
+        "statusBarItem.hoverBackground": "#427d81",
+        "titleBar.activeBackground": "#539ea3",
+        "titleBar.activeForeground": "#15202b",
+        "titleBar.inactiveBackground": "#539ea399",
+        "titleBar.inactiveForeground": "#15202b99"
+    },
+    "peacock.color": "#539ea3"
 }
