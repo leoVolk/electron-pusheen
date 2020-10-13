@@ -1,6 +1,6 @@
 var speechBubble = document.getElementById("speech-bubble");
 var pusheenImg = document.getElementById("pusheen");
-var imgBasePath = "./assets/pusheens/";
+var imgBasePath = "./assets/pusheens/time/";
 
 // first tick
 tick_fast();
@@ -38,7 +38,7 @@ function getPusheenByTimeOfDay() {
   //TODO: FIX THIS SHIT
   if (currentHour >= 6 && currentHour < 12) {
     path = "morning";
-    rand = Math.round(Math.random() * 2) + 1;
+    rand = Math.round(Math.random()) + 1;
   } else if (currentHour >= 12 && currentHour < 14) {
     path = "lunch";
     rand = Math.round(Math.random() * 3) + 1;
