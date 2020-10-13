@@ -79,27 +79,34 @@ function setWeather(weather) {
   switch (weather.weather_state_abbr) {
     case "sn":
       setPusheen("snow");
+      setSpeechBubble("It's snowing! Get your sledge!");
       break;
     case "sl":
       setPusheen("snow");
+      setSpeechBubble("Sleet, EWW! All the mud...");
       break;
     case "h":
       setPusheen("snow");
+      setSpeechBubble("It's hailing man! No, seriously, don't go out.");
       break;
     case "t":
       setPusheen("rain");
+      setSpeechBubble("Rain? Enjoy a cup of tea and relax!");
       break;
     case "hr":
       setPusheen("rain");
+      setSpeechBubble("Rain? Enjoy a cup of tea and relax!");
       break;
     case "lr":
       setPusheen("rain");
+      setSpeechBubble("It's only light rain...");
       break;
     case "s":
       setPusheen("rain");
+      setSpeechBubble("It's not going to be sunny for long with these showers!");
       break;
     default:
       setPusheen("sunny");
   }
-  setSpeechBubble(weather.weather_state_name);
+  
 }
