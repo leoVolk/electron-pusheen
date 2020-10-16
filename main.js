@@ -1,10 +1,11 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, Tray, Menu, ipcMain } = require("electron");
 const path = require("path");
-
+const isDev = require("electron-is-dev");
 let tray = null;
 let mainWindow = null;
 let weatherWindow = null;
+let devtools = null;
 function createMainWindow() {
   tray = new Tray(path.join(__dirname, "/assets/logo.png"));
   const contextMenu = Menu.buildFromTemplate([
@@ -40,10 +41,6 @@ function createMainWindow() {
     },
     { type: "separator" },
     {
-      label: "Open Dev Tools",
-      role: "toggleDevTools",
-    },
-    {
       label: "Quit",
       click: function () {
         mainWindow.destroy();
@@ -58,7 +55,6 @@ function createMainWindow() {
   mainWindow = createBrowserWindow(256, 128);
   // and load the index.html of the app.
   mainWindow.loadFile("index.html");
-  // Open the DevTools.
 }
 if (process.platform === "darwin") {
   app.dock.hide();
@@ -91,7 +87,7 @@ app.on("window-all-closed", function () {
 // code. You can also put them in separate files and require them here.
 
 function createBrowserWindow(w, h) {
-  return new BrowserWindow({
+  let window = new BrowserWindow({
     width: w,
     height: h,
     webPreferences: {
@@ -101,7 +97,14 @@ function createBrowserWindow(w, h) {
     transparent: true,
     resizable: false,
     alwaysOnTop: true,
-    focusable: false,
+    focusable: true,
     title: "Pusheen",
+    backgroundColor: "#00000000",
+    icon: path.join(__dirname, "/assets/logo.icns"),
   });
+  if (isDev) {
+    window.webContents.openDevTools({ mode: "detach" });
+  }
+
+  return window;
 }
