@@ -1,6 +1,8 @@
+const path = require("path");
+
 var speechBubble = document.getElementById("speech-bubble");
 var pusheenImg = document.getElementById("pusheen");
-var imgBasePath = "../assets/pusheens/weather/";
+var imgBasePath = path.join(__dirname, "../assets/pusheens/weather/");
 
 const axios = require("axios");
 const { get } = require("jquery");
@@ -103,10 +105,13 @@ function setWeather(weather) {
       break;
     case "s":
       setPusheen("rain");
-      setSpeechBubble("It's not going to be sunny for long with these showers!");
+      setSpeechBubble(
+        "It's not going to be sunny for long with these showers!"
+      );
       break;
     default:
       setPusheen("sunny");
+      setSpeechBubble("Not too bad! Get some fresh air!");
+      break;
   }
-  
 }

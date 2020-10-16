@@ -27,9 +27,8 @@ function createMainWindow() {
       type: "checkbox",
       click: function () {
         if (!weatherWindow) {
-          weatherWindow = createBrowserWindow();
+          weatherWindow = createBrowserWindow(256, 128);
           weatherWindow.loadFile("./views/weather.html");
-          //weatherWindow.webContents.openDevTools();
         } else {
           if (weatherWindow.isVisible()) {
             weatherWindow.hide();
@@ -41,6 +40,10 @@ function createMainWindow() {
     },
     { type: "separator" },
     {
+      label: "Open Dev Tools",
+      role: "toggleDevTools",
+    },
+    {
       label: "Quit",
       click: function () {
         mainWindow.destroy();
@@ -48,15 +51,14 @@ function createMainWindow() {
       },
     },
   ]);
-  tray.setToolTip("Look! Pusheen!");
+  tray.setToolTip("Pusheen!");
   tray.setContextMenu(contextMenu);
 
   // Create the browser window.
-  mainWindow = createBrowserWindow();
+  mainWindow = createBrowserWindow(256, 128);
   // and load the index.html of the app.
   mainWindow.loadFile("index.html");
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
 }
 if (process.platform === "darwin") {
   app.dock.hide();
@@ -70,8 +72,12 @@ app.whenReady().then(() => {
   app.on("activate", function () {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
-    if (BrowserWindow.getAllWindows().length === 0) createWindow();
+    if (BrowserWindow.getAllWindows().length === 0) createMainWindow();
   });
+});
+
+app.setLoginItemSettings({
+  openAtLogin: true,
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common
@@ -84,10 +90,10 @@ app.on("window-all-closed", function () {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
 
-function createBrowserWindow() {
+function createBrowserWindow(w, h) {
   return new BrowserWindow({
-    width: 256,
-    height: 128,
+    width: w,
+    height: h,
     webPreferences: {
       nodeIntegration: true,
     },
