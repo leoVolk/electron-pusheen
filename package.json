@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "electron pusheen",
   "main": "main.js",
+  "author": "Leonhard Volkmann",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
