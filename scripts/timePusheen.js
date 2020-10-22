@@ -25,9 +25,10 @@ function setSpeechBubble(text) {
   speechBubble.innerText = text;
 }
 
-function tick_fast() {
+function tick_fast() { 
   const currentHour = new Date().getHours();
-  if (currentHour >= 5 && currentHour < 8) setSpeechBubble("Hmpf. Need. Coffee.");
+  if (currentHour >= 5 && currentHour < 8)
+    setSpeechBubble("Hmpf. Need. Coffee.");
   else setSpeechBubble("It's currently: " + new Date().toLocaleTimeString());
 }
 
@@ -40,7 +41,7 @@ function getPusheenByTimeOfDay() {
   let path = "";
   let rand;
   if (currentHour >= 5 && currentHour < 8) {
-    return 'too_early.gif';
+    return "too_early.gif";
   } else if (currentHour >= 8 && currentHour < 12) {
     path = "morning";
   } else if (currentHour >= 12 && currentHour < 14) {

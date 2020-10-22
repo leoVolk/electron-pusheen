@@ -1,11 +1,18 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, Tray, Menu, ipcMain } = require("electron");
+const { app, BrowserWindow, Tray, Menu, screen, ipcMain } = require("electron");
 const path = require("path");
 const isDev = require("electron-is-dev");
+const { electron } = require("process");
+
+try {
+  require("electron-reloader")(module);
+} catch (_) {}
+
 let tray = null;
 let mainWindow = null;
 let weatherWindow = null;
-let devtools = null;
+let mailWindow = null;
+
 function createMainWindow() {
   tray = new Tray(path.join(__dirname, "/assets/logo.png"));
   const contextMenu = Menu.buildFromTemplate([
@@ -39,7 +46,29 @@ function createMainWindow() {
         }
       },
     },
+    {
+      label: "Mail",
+      type: "checkbox",
+      click: function () {
+        if (!mailWindow) {
+          mailWindow = createBrowserWindow(256, 128);
+          mailWindow.loadFile("./views/mail.html");
+        } else {
+          if (mailWindow.isVisible()) {
+            mailWindow.hide();
+          } else {
+            mailWindow.show();
+          }
+        }
+      },
+    },
     { type: "separator" },
+    /*     {
+      label: "Create Overflow",
+      click: function () {
+        createWindowOverflow(100);
+      },
+    }, */
     {
       label: "Quit",
       click: function () {
@@ -86,13 +115,15 @@ app.on("window-all-closed", function () {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
 
-function createBrowserWindow(w, h) {
+function createBrowserWindow(w, h, x = 0, y = 0) {
   let window = new BrowserWindow({
     width: w,
     height: h,
     webPreferences: {
       nodeIntegration: true,
     },
+    x: x,
+    y: y,
     frame: false,
     transparent: true,
     resizable: false,
@@ -108,3 +139,17 @@ function createBrowserWindow(w, h) {
 
   return window;
 }
+
+function createWindowOverflow(amount) {
+  for (let i = 0; i < amount; i++) {
+    let window = createBrowserWindow(
+      256,
+      128,
+      Math.round(Math.random() * screen.getPrimaryDisplay().workAreaSize.width),
+      Math.round(Math.random() * screen.getPrimaryDisplay().workAreaSize.height)
+    );
+    window.loadFile("index.html");
+  }
+}
+
+ipcMain.on("openMailWindow", function () {});
