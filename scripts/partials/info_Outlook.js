@@ -1,0 +1,2 @@
+const outlookInfoText = `<div class="alert alert-success mt-3" role="alert"><h4 class="alert-heading">Info!</h4><p>You will need to activate <b>IMAP</b> in your Outlook MailSettings! See how to: <a href="https://support.microsoft.com/en-gb/office/pop-and-imap-email-settings-for-outlook-8361e398-8af4-4e97-b147-6c6c4ac95353?ui=en-us&rs=en-gb&ad=gb">POP and IMAP email settings for Outlook</a></a></p></div>`;
+module.exports = outlookInfoText;

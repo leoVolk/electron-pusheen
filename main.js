@@ -1,5 +1,13 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, Tray, Menu, screen, ipcMain } = require("electron");
+const {
+  app,
+  BrowserWindow,
+  Tray,
+  Menu,
+  screen,
+  ipcMain,
+  ipcRenderer,
+} = require("electron");
 const path = require("path");
 const isDev = require("electron-is-dev");
 const { electron } = require("process");
@@ -151,10 +159,9 @@ function createSettingsWindow() {
     title: "Settings - Electro Pusheen",
   });
 
-  window.on("close", function (event) {
-    event.preventDefault();
-    window.hide();
-  });
+  if (isDev) {
+    window.webContents.openDevTools({ mode: "detach" });
+  }
 
   return window;
 }
@@ -174,4 +181,8 @@ ipcMain.on("openMailWindow", function () {
 
 ipcMain.on("hideMailWindow", function () {
   mailWindow.hide();
+});
+
+ipcMain.on("updatedMailer", function () {
+  mainWindow.webContents.send("updateMailer");
 });

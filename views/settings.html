@@ -10,16 +10,19 @@
     <meta charset="UTF-8" />
   </head>
 
-  <body>
+  <body style="background-color: rgb(240, 240, 240) !important">
     <div class="container">
       <div class="row">
         <div class="col">
-          <div class="card mt-3" style="width: 100%">
+          <div class="card mt-3 shadow" style="width: 100%">
+            <h1 style="text-align: center" class="mt-2 mb-2">Settings</h1>
+          </div>
+          <div class="card mt-2 shadow" style="width: 100%">
             <div class="card-body">
               <h5 class="card-title" style="text-decoration: underline">
                 Mail Notification Settings
               </h5>
-              <form class="mt-3">
+              <div class="mt-3">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Email address</label>
                   <input
@@ -43,8 +46,20 @@
                 <div id="noPassword" class="alert alert-danger" role="alert">
                   No Password Found
                 </div>
-                <button type="submit" id="submit" class="btn btn-primary">Set</button>
-              </form>
+              </div>
+
+              <div>
+                <label class="" for="imap-select">Select Email Provider</label>
+                <select id="imap-select" class="custom-select">
+                  <option selected value="1">Google Mail</option>
+                  <option value="2">Outlook</option>
+                </select>
+              </div>
+
+              <div id="infoField"></div>
+              <button id="submitBtn" class="btn mt-3 btn-primary">
+                Apply Settings
+              </button>
             </div>
           </div>
         </div>

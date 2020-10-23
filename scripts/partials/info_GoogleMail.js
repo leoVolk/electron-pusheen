@@ -1,0 +1,2 @@
+const googleMailInfoText = `<div class="alert alert-success mt-3" role="alert"><h4 class="alert-heading">Info!</h4><p>You will need to activate <b>IMAP</b> in yourGoogle MailSettings!<ol><li>On your computer, open <a href="https://mail.google.com/">Gmail</a>.</li><li>In the top right, click Settings and then "See all settings".</li><li>Click the <b>Forwarding and POP/IMAP</b> tab.</li><li>In the "IMAP access" section, select <b>Enable IMAP</b>.</li><li><b>Click Save Changes.</b></li></ol></p></div>`;
+module.exports = googleMailInfoText;
