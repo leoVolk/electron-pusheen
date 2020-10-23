@@ -2,7 +2,7 @@
 
 A pusheen widget for your desktop! Meow!
 
-[<img src="./assets/pusheens/default.gif" width="128"/>](./assets/pusheens/default.gif)
+[<img src="./src/assets/pusheens/default.gif" width="128"/>](./src/assets/pusheens/default.gif)
 
 ## Setup
 
