@@ -118,6 +118,7 @@ app.on("window-all-closed", function () {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
 
+// creates the default browser window for pusheen
 function createBrowserWindow(w, h, x = 0, y = 0) {
   let window = new BrowserWindow({
     width: w,
@@ -144,10 +145,9 @@ function createBrowserWindow(w, h, x = 0, y = 0) {
   return window;
 }
 
+// creates the settings window
 function createSettingsWindow() {
   let window = new BrowserWindow({
-    width: 1000,
-    height: 600,
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true,
@@ -166,6 +166,9 @@ function createSettingsWindow() {
   return window;
 }
 
+
+
+//listens on the main window if the mail window should be opened
 ipcMain.on("openMailWindow", function () {
   if (!mailWindow) {
     mailWindow = createBrowserWindow(256, 128);
@@ -179,10 +182,12 @@ ipcMain.on("openMailWindow", function () {
   }
 });
 
+//listens on the mail window close button to hide the mail window
 ipcMain.on("hideMailWindow", function () {
   mailWindow.hide();
 });
 
+// listens on the settings window if the mail settings have been updated and restarts the mail listener
 ipcMain.on("updatedMailer", function () {
   mainWindow.webContents.send("updateMailer");
 });

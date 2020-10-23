@@ -38,6 +38,7 @@ function tick_long() {
   getWeather();
 }
 
+// gets weather at current location via 3 api calls which is unnecessary complicated but idgaf
 async function getWeather() {
   setSpeechBubble("Loading...");
   pusheenImg.style.visibility = "hidden";
@@ -74,7 +75,7 @@ async function getWeather() {
       console.log(error);
     });
 }
-
+// sets the weather text and gif based on the the weather state
 function setWeather(weather) {
   //see:
   //https://www.metaweather.com/api/

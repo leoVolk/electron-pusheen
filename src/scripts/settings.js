@@ -1,16 +1,17 @@
 const { ipcRenderer } = require("electron");
 const storage = require("electron-json-storage");
 const path = require("path");
+// gmail text stored for convenience
 const gmailText = require(path.join(
   __dirname,
   "../scripts/partials/info_GoogleMail.js"
 ));
-
+// outlook text stored for convenience
 const outlookText = require(path.join(
   __dirname,
   "../scripts/partials/info_Outlook.js"
 ));
-
+//get elements from document
 const emailInput = document.getElementById("emailInput");
 const passwordInput = document.getElementById("passwordInput");
 const noEmail = document.getElementById("noEmail");
@@ -21,6 +22,7 @@ const imapSelect = document.getElementById("imap-select");
 
 let imapSettings = {};
 
+// set imap settings based on the imap select value
 imapSelect.addEventListener("change", function () {
   if (imapSelect.value == 1) {
     imapSettings.host = "imap.gmail.com";
@@ -33,6 +35,8 @@ imapSelect.addEventListener("change", function () {
   }
 });
 
+// gets email settings (email, password, host, port) from storage
+// if not existing, empty email & password, defaults imap settings to google
 function getMailSettings() {
   storage.get("emailSettings", function (error, data) {
     console.log(data);
@@ -68,6 +72,7 @@ submitButton.addEventListener("click", function () {
   setMailSettings();
 });
 
+// writes mail settings to storage
 async function setMailSettings() {
   storage.set(
     "emailSettings",

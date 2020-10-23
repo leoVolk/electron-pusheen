@@ -35,7 +35,7 @@ function tick_fast() {
 function tick_long() {
   setPusheen();
 }
-
+//displays a different pusheen for each time of day, randomly selected from folder
 function getPusheenByTimeOfDay() {
   const currentHour = new Date().getHours();
   let path = "";

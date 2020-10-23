@@ -3,6 +3,9 @@ var { MailListener } = require("mail-listener5");
 const storage = require("electron-json-storage");
 
 var mailListener;
+
+// initializes the mail listener with storage data
+// TODO: error handling
 function init() {
   storage.get("emailSettings", function (error, data) {
     if (error) throw error;
@@ -65,6 +68,7 @@ function init() {
   });
 }
 
+// listens on updateMailer from main
 ipcRenderer.on("updateMailer", function () {
   if (mailListener) {
     mailListener.stop();
