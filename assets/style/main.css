@@ -2,9 +2,9 @@ body {
   background: transparent !important;
 }
 
-div {
+/* div {
   background: transparent;
-}
+} */
 
 .speech {
   position: relative;
@@ -47,4 +47,18 @@ img.pusheen {
   border-bottom: 0;
   margin-top: -5px;
   margin-right: -10px;
+}
+
+.close-btn{
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  height: 24px;
+  width: 24px;
+  align-content: center;
+  cursor: default;
+  line-height: normal !important;
+  border-radius: 5px;
+  border: none;
+
 }

@@ -12,6 +12,7 @@ let tray = null;
 let mainWindow = null;
 let weatherWindow = null;
 let mailWindow = null;
+let settingsWindow = null;
 
 function createMainWindow() {
   tray = new Tray(path.join(__dirname, "/assets/logo.png"));
@@ -46,29 +47,23 @@ function createMainWindow() {
         }
       },
     },
+    { type: "separator" },
     {
-      label: "Mail",
+      label: "Settings",
       type: "checkbox",
       click: function () {
-        if (!mailWindow) {
-          mailWindow = createBrowserWindow(256, 128);
-          mailWindow.loadFile("./views/mail.html");
+        if (!settingsWindow) {
+          settingsWindow = createSettingsWindow();
+          settingsWindow.loadFile("./views/settings.html");
         } else {
-          if (mailWindow.isVisible()) {
-            mailWindow.hide();
+          if (settingsWindow.isVisible()) {
+            settingsWindow.hide();
           } else {
-            mailWindow.show();
+            settingsWindow.show();
           }
         }
       },
     },
-    { type: "separator" },
-    /*     {
-      label: "Create Overflow",
-      click: function () {
-        createWindowOverflow(100);
-      },
-    }, */
     {
       label: "Quit",
       click: function () {
@@ -121,6 +116,7 @@ function createBrowserWindow(w, h, x = 0, y = 0) {
     height: h,
     webPreferences: {
       nodeIntegration: true,
+      enableRemoteModule: true,
     },
     x: x,
     y: y,
@@ -140,16 +136,42 @@ function createBrowserWindow(w, h, x = 0, y = 0) {
   return window;
 }
 
-function createWindowOverflow(amount) {
-  for (let i = 0; i < amount; i++) {
-    let window = createBrowserWindow(
-      256,
-      128,
-      Math.round(Math.random() * screen.getPrimaryDisplay().workAreaSize.width),
-      Math.round(Math.random() * screen.getPrimaryDisplay().workAreaSize.height)
-    );
-    window.loadFile("index.html");
-  }
+function createSettingsWindow() {
+  let window = new BrowserWindow({
+    width: 1000,
+    height: 600,
+    webPreferences: {
+      nodeIntegration: true,
+      enableRemoteModule: true,
+    },
+    frame: true,
+    transparent: false,
+    resizable: true,
+    focusable: true,
+    title: "Settings - Electro Pusheen",
+  });
+
+  window.on("close", function (event) {
+    event.preventDefault();
+    window.hide();
+  });
+
+  return window;
 }
 
-ipcMain.on("openMailWindow", function () {});
+ipcMain.on("openMailWindow", function () {
+  if (!mailWindow) {
+    mailWindow = createBrowserWindow(256, 128);
+    mailWindow.loadFile("./views/mail.html");
+  } else {
+    if (mailWindow.isVisible()) {
+      mailWindow.hide();
+    } else {
+      mailWindow.show();
+    }
+  }
+});
+
+ipcMain.on("hideMailWindow", function () {
+  mailWindow.hide();
+});

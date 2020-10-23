@@ -25,7 +25,7 @@ function setSpeechBubble(text) {
   speechBubble.innerText = text;
 }
 
-function tick_fast() { 
+function tick_fast() {
   const currentHour = new Date().getHours();
   if (currentHour >= 5 && currentHour < 8)
     setSpeechBubble("Hmpf. Need. Coffee.");
