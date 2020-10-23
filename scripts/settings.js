@@ -20,6 +20,7 @@ const infoField = document.getElementById("infoField");
 const imapSelect = document.getElementById("imap-select");
 
 let imapSettings = {};
+
 imapSelect.addEventListener("change", function () {
   if (imapSelect.value == 1) {
     imapSettings.host = "imap.gmail.com";
