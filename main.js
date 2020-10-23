@@ -1,3 +1,5 @@
+
+// TODO: Export for better reading
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, Tray, Menu, ipcMain } = require("electron");
 const { ipcRenderer } = require("electron");
