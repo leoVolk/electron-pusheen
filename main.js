@@ -1,13 +1,9 @@
 // Modules to control application life and create native browser window
-const {
-  app,
-  BrowserWindow,
-  Tray,
-  Menu,
-  screen,
-  ipcMain,
-  ipcRenderer,
-} = require("electron");
+const { app, BrowserWindow, Tray, Menu, ipcMain } = require("electron");
+const { ipcRenderer } = require("electron");
+var { MailListener } = require("mail-listener5");
+const storage = require("electron-json-storage");
+
 const path = require("path");
 const isDev = require("electron-is-dev");
 const { electron } = require("process");
@@ -21,6 +17,7 @@ let mainWindow = null;
 let weatherWindow = null;
 let mailWindow = null;
 let settingsWindow = null;
+let mailListener;
 
 function createMainWindow() {
   tray = new Tray(path.join(__dirname, "/src/assets/logo.png"));
@@ -96,7 +93,7 @@ if (process.platform === "darwin") {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   createMainWindow();
-
+  initMailer();
   app.on("activate", function () {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
@@ -166,22 +163,6 @@ function createSettingsWindow() {
   return window;
 }
 
-
-
-//listens on the main window if the mail window should be opened
-ipcMain.on("openMailWindow", function () {
-  if (!mailWindow) {
-    mailWindow = createBrowserWindow(256, 128);
-    mailWindow.loadFile("./src/views/mail.html");
-  } else {
-    if (mailWindow.isVisible()) {
-      mailWindow.hide();
-    } else {
-      mailWindow.show();
-    }
-  }
-});
-
 //listens on the mail window close button to hide the mail window
 ipcMain.on("hideMailWindow", function () {
   mailWindow.hide();
@@ -189,5 +170,82 @@ ipcMain.on("hideMailWindow", function () {
 
 // listens on the settings window if the mail settings have been updated and restarts the mail listener
 ipcMain.on("updatedMailer", function () {
-  mainWindow.webContents.send("updateMailer");
+  if (mailListener) {
+    mailListener.stop();
+    initMailer();
+  } else {
+    initMailer();
+  }
 });
+
+// TODO: error handling
+function initMailer() {
+  storage.get("emailSettings", function (error, data) {
+    if (error) throw error;
+    mailListener = new MailListener({
+      username: data.email,
+      password: data.password,
+      host: data.host,
+      port: data.port, // imap port
+      tls: true,
+      connTimeout: 10000, // Default by node-imap
+      authTimeout: 5000, // Default by node-imap,
+      debug: console.log, // Or your custom function with only one incoming argument. Default: null
+      tlsOptions: { rejectUnauthorized: false },
+      mailbox: "INBOX", // mailbox to monitor
+      searchFilter: ["UNSEEN"], // the search filter being used after an IDLE notification has been retrieved
+      markSeen: true, // all fetched email willbe marked as seen and not fetched next time
+      fetchUnreadOnStart: true, // use it only if you want to get all unread email on lib start. Default is `false`,
+      attachments: false, // download attachments as they are encountered to the project directory
+      attachmentOptions: { directory: "attachments/" }, // specify a download directory for attachments
+    });
+    mailListener.start();
+
+    // start listening
+
+    // stop listening
+    //mailListener.stop();
+
+    mailListener.on("server:connected", function () {
+      console.log("imapConnected");
+    });
+
+    mailListener.on("mailbox", function (mailbox) {
+      console.log("Total number of mails: ", mailbox.messages.total); // this field in mailbox gives the total number of emails
+    });
+
+    mailListener.on("server:disconnected", function () {
+      console.log("imapDisconnected");
+    });
+
+    mailListener.on("error", function (err) {
+      console.log(err);
+    });
+
+    mailListener.on("headers", function (headers, seqno) {
+      // do something with mail headers
+    });
+
+    mailListener.on("body", function (body, seqno) {
+      // do something with mail body
+    });
+
+    mailListener.on("attachment", function (attachment, path, seqno) {
+      // do something with attachment
+    });
+
+    mailListener.on("mail", function (mail, seqno) {
+      if (!mailWindow) {
+        mailWindow = createBrowserWindow(256, 128);
+        mailWindow.loadFile("./src/views/mail.html");
+      } else {
+        if (mailWindow.isVisible()) {
+          mailWindow.hide();
+        } else {
+          mailWindow.show();
+        }
+      }
+      // do something with the whole email as a single object
+    });
+  });
+}
