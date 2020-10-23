@@ -67,7 +67,7 @@ submitButton.addEventListener("click", function () {
   setMailSettings();
 });
 
-function setMailSettings() {
+async function setMailSettings() {
   storage.set(
     "emailSettings",
     {
@@ -78,12 +78,10 @@ function setMailSettings() {
     },
     function (error) {
       if (error) throw error;
+      ipcRenderer.send("updatedMailer");
+      storage.get("emailSettings", function (error, data) {
+        console.log(data);
+      });
     }
   );
-
-  ipcRenderer.send("updatedMailer");
-
-  storage.get("emailSettings", function (error, data) {
-    console.log(data);
-  });
 }
