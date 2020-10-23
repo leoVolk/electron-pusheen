@@ -2,7 +2,7 @@ const path = require("path");
 const fs = require("fs");
 var speechBubble = document.getElementById("speech-bubble");
 var pusheenImg = document.getElementById("pusheen");
-var imgBasePath = path.join(__dirname, "/assets/pusheens/time/");
+var imgBasePath = path.join(__dirname, "/src/assets/pusheens/time/");
 
 // first tick
 tick_fast();

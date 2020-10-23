@@ -23,7 +23,7 @@ let mailWindow = null;
 let settingsWindow = null;
 
 function createMainWindow() {
-  tray = new Tray(path.join(__dirname, "/assets/logo.png"));
+  tray = new Tray(path.join(__dirname, "/src/assets/logo.png"));
   const contextMenu = Menu.buildFromTemplate([
     { label: "pusheen" },
     { type: "separator" },
@@ -45,7 +45,7 @@ function createMainWindow() {
       click: function () {
         if (!weatherWindow) {
           weatherWindow = createBrowserWindow(256, 128);
-          weatherWindow.loadFile("./views/weather.html");
+          weatherWindow.loadFile("./src/views/weather.html");
         } else {
           if (weatherWindow.isVisible()) {
             weatherWindow.hide();
@@ -62,7 +62,7 @@ function createMainWindow() {
       click: function () {
         if (!settingsWindow) {
           settingsWindow = createSettingsWindow();
-          settingsWindow.loadFile("./views/settings.html");
+          settingsWindow.loadFile("./src/views/settings.html");
         } else {
           if (settingsWindow.isVisible()) {
             settingsWindow.hide();
@@ -135,7 +135,7 @@ function createBrowserWindow(w, h, x = 0, y = 0) {
     focusable: true,
     title: "Pusheen",
     backgroundColor: "#00000000",
-    icon: path.join(__dirname, "/assets/logo.icns"),
+    icon: path.join(__dirname, "/src/assets/logo.icns"),
   });
   if (isDev) {
     window.webContents.openDevTools({ mode: "detach" });
@@ -169,7 +169,7 @@ function createSettingsWindow() {
 ipcMain.on("openMailWindow", function () {
   if (!mailWindow) {
     mailWindow = createBrowserWindow(256, 128);
-    mailWindow.loadFile("./views/mail.html");
+    mailWindow.loadFile("./src/views/mail.html");
   } else {
     if (mailWindow.isVisible()) {
       mailWindow.hide();
