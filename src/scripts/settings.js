@@ -40,8 +40,8 @@ imapSelect.addEventListener("change", function () {
 function getMailSettings() {
   storage.get("emailSettings", function (error, data) {
     console.log(data);
-    if (data.email) noEmail.hidden = true;
-    if (data.password) noPassword.hidden = true;
+    if (data.email && data.email !== "") noEmail.hidden = true;
+    if (data.password && data.password !== "") noPassword.hidden = true;
 
     if (data.password && data.email) {
       emailInput.value = data.email;
@@ -86,9 +86,11 @@ async function setMailSettings() {
       if (error) throw error;
       ipcRenderer.send("updatedMailer");
       storage.get("emailSettings", function (error, data) {
-        console.log(data);
+        if (data.email && data.email !== "") noEmail.hidden = true;
+        else noEmail.hidden = false;
+        if (data.password && data.password !== "") noPassword.hidden = true;
+        else noPassword.hidden = false;
       });
     }
   );
 }
-
