@@ -1,6 +1,3 @@
-
-# WILL UPDATE TO MORE FLEXIBLE VERSION USING VUE.JS AND ELECTRON
-
 # electro-pusheen
 
 A pusheen widget for your desktop! Meow!
