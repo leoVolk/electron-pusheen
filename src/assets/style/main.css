@@ -2,9 +2,13 @@ body {
   background: transparent !important;
 }
 
-div {
-  background: transparent;
+.hidden {
+  visibility: hidden;
 }
+
+/* div {
+  background: transparent;
+} */
 
 .speech {
   position: relative;
