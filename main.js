@@ -44,8 +44,8 @@ function createMainWindow() {
       checked: false,
       click: function () {
         if (!timeWindow) {
-          weatherWindow = createBrowserWindow(256, 128);
-          weatherWindow.loadFile("./src/views/weather.html");
+          timeWindow = createBrowserWindow(400, 200);
+          timeWindow.loadFile("./index.html");
         } else if (timeWindow.isVisible()) {
           timeWindow.hide();
         } else {
@@ -58,7 +58,7 @@ function createMainWindow() {
       type: "checkbox",
       click: function () {
         if (!weatherWindow) {
-          weatherWindow = createBrowserWindow(256, 128);
+          weatherWindow = createBrowserWindow(400, 200);
           weatherWindow.loadFile("./src/views/weather.html");
         } else {
           if (weatherWindow.isVisible()) {
@@ -147,7 +147,7 @@ function createBrowserWindow(w, h, x = 0, y = 0) {
     transparent: true,
     resizable: true,
     alwaysOnTop: true,
-    focusable: true,
+    focusable: false,
     skipTaskbar: true,
     title: "Pusheen",
     hasShadow: false,
@@ -171,7 +171,7 @@ function createSettingsWindow() {
     frame: true,
     transparent: false,
     resizable: true,
-    focusable: true,
+    focusable: false,
     title: "Settings - Electro Pusheen",
   });
 
