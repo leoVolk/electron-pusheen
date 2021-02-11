@@ -16,6 +16,7 @@ try {
 let tray = null;
 let mainWindow = null;
 let weatherWindow = null;
+let timeWindow = null;
 let mailWindow = null;
 let settingsWindow = null;
 let mailListener;
@@ -26,7 +27,7 @@ function createMainWindow() {
     { label: "pusheen" },
     { type: "separator" },
     {
-      label: "Time",
+      label: "Default",
       type: "checkbox",
       checked: true,
       click: function () {
@@ -34,6 +35,21 @@ function createMainWindow() {
           mainWindow.hide();
         } else {
           mainWindow.show();
+        }
+      },
+    },
+    {
+      label: "Time",
+      type: "checkbox",
+      checked: false,
+      click: function () {
+        if (!timeWindow) {
+          weatherWindow = createBrowserWindow(256, 128);
+          weatherWindow.loadFile("./src/views/weather.html");
+        } else if (timeWindow.isVisible()) {
+          timeWindow.hide();
+        } else {
+          timeWindow.show();
         }
       },
     },
@@ -84,7 +100,7 @@ function createMainWindow() {
   // Create the browser window.
   mainWindow = createBrowserWindow(256, 128);
   // and load the index.html of the app.
-  mainWindow.loadFile("index.html");
+  mainWindow.loadFile("./src/views/random.html");
 }
 if (process.platform === "darwin") {
   app.dock.hide();
@@ -94,7 +110,7 @@ if (process.platform === "darwin") {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   createMainWindow();
-  initMailer();
+  //initMailer();
   app.on("activate", function () {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.

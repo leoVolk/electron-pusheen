@@ -2,9 +2,9 @@ body {
   background: transparent !important;
 }
 
-/* div {
+div {
   background: transparent;
-} */
+}
 
 .speech {
   position: relative;
@@ -14,9 +14,9 @@ body {
 }
 
 img.pusheen {
-  position: fixed;
-  left: 50%;
-  max-width: 50%;
+  position: relative;
+  -webkit-user-drag: none;
+  max-width: 100%;
 }
 
 .speech::after {
