@@ -98,7 +98,7 @@ function createMainWindow() {
   tray.setContextMenu(contextMenu);
 
   // Create the browser window.
-  mainWindow = createBrowserWindow(256, 128);
+  mainWindow = createBrowserWindow(400, 200);
   // and load the index.html of the app.
   mainWindow.loadFile("./src/views/random.html");
 }

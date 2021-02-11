@@ -14,6 +14,7 @@ body {
   position: relative;
   background-color: wheat;
   border-radius: 5px;
+  border: 2px solid black;
   padding: 4px 8px 4px 8px;
 }
 
@@ -24,6 +25,7 @@ img.pusheen {
 }
 
 .speech::after {
+  border: 2px solid black;
   content: "";
   position: absolute;
   top: 20px;
@@ -39,6 +41,7 @@ img.pusheen {
 }
 
 .speech::before {
+  
   content: "";
   position: absolute;
   top: 20px;

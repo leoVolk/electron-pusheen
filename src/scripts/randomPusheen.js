@@ -97,4 +97,4 @@ const randomPusheens = [
 setPusheen(getRandomFromArray(randomPusheens));
 setInterval(function () {
   setPusheen(getRandomFromArray(randomPusheens));
-}, 1000 * 60 * 20);
+}, 1000 * 60 * 10);
