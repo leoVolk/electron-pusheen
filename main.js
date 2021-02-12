@@ -15,12 +15,6 @@ try {
 
 let tray = null;
 let mainWindow = null;
-let weatherWindow = null;
-let timeWindow = null;
-let mailWindow = null;
-let settingsWindow = null;
-let mailListener;
-
 function createMainWindow() {
   tray = new Tray(path.join(__dirname, "/src/assets/logo.png"));
   const contextMenu = Menu.buildFromTemplate([
@@ -57,6 +51,7 @@ function createMainWindow() {
 if (process.platform === "darwin") {
   app.dock.hide();
 }
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
