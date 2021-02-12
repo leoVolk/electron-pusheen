@@ -8,9 +8,9 @@ setPusheen = (pusheen) => {
   //clearArtifacts();
 
   if (pusheen.text == "") {
-    speechBubble.hidden = true;
+    speechBubble.parentElement.hidden = true;
   } else {
-    speechBubble.hidden = false;
+    speechBubble.parentElement.hidden = false;
   }
 
   pusheenImg.src = pusheen.imgUrl;
@@ -94,6 +94,7 @@ const randomPusheens = [
     text: "BooooHooooo",
   },
 ];
+
 setPusheen(getRandomFromArray(randomPusheens));
 setInterval(function () {
   setPusheen(getRandomFromArray(randomPusheens));

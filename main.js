@@ -92,15 +92,17 @@ function createBrowserWindow(w, h, x = 0, y = 0) {
     y: y,
     frame: false,
     transparent: true,
-    resizable: true,
+    resizable: false,
     alwaysOnTop: true,
     focusable: false,
     skipTaskbar: true,
     title: "Pusheen",
+    maximizable: false,
     hasShadow: false,
     backgroundColor: "#00000000",
     icon: path.join(__dirname, "/src/assets/logo.icns"),
   });
+
   if (isDev) {
     window.webContents.openDevTools({ mode: "detach" });
   }
