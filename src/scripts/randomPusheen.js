@@ -1,7 +1,12 @@
-const path = require("path");
+const storage = require("electron-json-storage");
 var speechBubble = document.getElementById("speech-bubble");
 var pusheenImg = document.getElementById("pusheen");
-var imgBasePath = path.join(__dirname, "../assets/pusheens/");
+var pusheens;
+
+storage.clear(function (error) {
+  if (error) throw error;
+});
+
 setPusheen = (pusheen) => {
   if (!pusheen) return;
 
@@ -16,8 +21,6 @@ setPusheen = (pusheen) => {
   pusheenImg.src = pusheen.imgUrl;
   speechBubble.innerHTML = pusheen.text;
 };
-
-clearArtifacts = () => {};
 
 getRandomFromArray = (arr) => {
   return arr[~~(arr.length * Math.random())];
@@ -95,7 +98,40 @@ const randomPusheens = [
   },
 ];
 
-setPusheen(getRandomFromArray(randomPusheens));
+
+function getPusheensFromStorage() {
+  storage.get("randomPusheens", function (error, data) {
+    if (error) throw error;
+
+    if (Object.getOwnPropertyNames(data).length === 0) {
+      storage.set("randomPusheens", randomPusheens, function (error) {
+        if (error) throw error;
+      });
+
+      getPusheensFromStorage();
+      return;
+    } else {
+      console.log(data);
+      pusheens = data;
+
+      setPusheen(getRandomFromArray(pusheens));
+      setInterval(function () {
+        setPusheen(getRandomFromArray(pusheens));
+      }, 1000 * 60 * 10);
+    }
+  });
+}
+
+getPusheensFromStorage();
+
+/* getPusheensFromStorage().then(data => function (d) {
+  setPusheen(getRandomFromArray(pusheens));
+  setInterval(function () {
+    setPusheen(getRandomFromArray(pusheens));
+  }, 1000 * 60 * 10);
+}); */
+
+/* setPusheen(getRandomFromArray(pusheens));
 setInterval(function () {
-  setPusheen(getRandomFromArray(randomPusheens));
-}, 1000 * 60 * 10);
+  setPusheen(getRandomFromArray(pusheens));
+}, 1000 * 60 * 10); */
