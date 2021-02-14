@@ -99,6 +99,8 @@ const randomPusheens = [
 ];
 
 
+//TODO: rewrite to async
+// storage.get().then()
 function getPusheensFromStorage() {
   storage.get("randomPusheens", function (error, data) {
     if (error) throw error;
@@ -124,14 +126,3 @@ function getPusheensFromStorage() {
 
 getPusheensFromStorage();
 
-/* getPusheensFromStorage().then(data => function (d) {
-  setPusheen(getRandomFromArray(pusheens));
-  setInterval(function () {
-    setPusheen(getRandomFromArray(pusheens));
-  }, 1000 * 60 * 10);
-}); */
-
-/* setPusheen(getRandomFromArray(pusheens));
-setInterval(function () {
-  setPusheen(getRandomFromArray(pusheens));
-}, 1000 * 60 * 10); */
