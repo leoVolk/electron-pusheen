@@ -1,0 +1,31 @@
+nav {
+  font-family: Roboto, Helvetica, Arial, sans-serif !important;
+  color: #50342b !important;
+  text-align: center;
+}
+
+h2 {
+  font-weight: 600 !important;
+  color: #50342b !important;
+}
+
+.logo-wrapper {
+  background-color: #ffeeed;
+  padding: 25px;
+}
+
+.logo {
+  height: 150px;
+}
+
+.logo-wordmark {
+  height: 100%;
+  width: auto;
+}
+
+@media only screen and (max-width: 767px) {
+  .logo {
+    max-height: 51px !important;
+    margin-bottom: 17px;
+  }
+}
