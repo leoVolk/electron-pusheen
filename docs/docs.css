@@ -1,7 +1,30 @@
+body {
+  font-family: Roboto, Arial, sans-serif !important;
+  color: #50342b !important;
+}
+
 nav {
-  font-family: Roboto, Helvetica, Arial, sans-serif !important;
+  font-family: Roboto, Arial, sans-serif !important;
   color: #50342b !important;
   text-align: center;
+}
+
+.nav-link {
+  color: #50342b !important;
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+.nav-link:hover {
+  color: #ffeeed !important;
+}
+
+a:hover {
+  color: #ffeeed !important;
+}
+
+.navbar-bg {
+  background-color: white !important;
 }
 
 h2 {
@@ -23,9 +46,41 @@ h2 {
   width: auto;
 }
 
+/*PHONE*/
 @media only screen and (max-width: 767px) {
   .logo {
     max-height: 51px !important;
-    margin-bottom: 17px;
   }
+
+  .logo-wrapper {
+    background-color: #ffeeed;
+    padding: 17px;
+  }
+}
+/*TABLET*/
+@media only screen and (max-width: 992px) {
+  .navbar {
+    background-color: white !important;
+  }
+}
+.container {
+  max-width: 992px !important;
+}
+
+#main h1 {
+  background-color: transparent;
+  background-image: url(./img/pink-dot.svg);
+  background-repeat: space;
+  background-size: auto 1em;
+  background-position: 0 50%;
+
+  text-align: center;
+}
+
+#main h1 span {
+  background-color: white;
+}
+
+textarea {
+  background-color: #fafafa;
 }

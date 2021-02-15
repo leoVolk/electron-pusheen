@@ -12,6 +12,7 @@ try {
 let tray = null;
 let mainWindow = null;
 
+
 function createMainWindow() {
   tray = new Tray(path.join(__dirname, "/src/assets/logo.png"));
 
