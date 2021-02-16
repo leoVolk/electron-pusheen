@@ -13,11 +13,17 @@
       crossorigin="anonymous"
     ></script>
 
+    <link rel="icon" href="./img/favicon.png" type="image/icon type" />
+
     <meta name="viewport" content="width=device-width" />
 
     <link rel="stylesheet" href="./docs.css" />
 
     <meta charset="UTF-8" />
+    <title>
+      Electron Pusheen | An Electron Widget featuring the internets most
+      adorable cat
+    </title>
   </head>
 
   <body style="background-color: white">
@@ -200,8 +206,32 @@
             <div class="col-12 align-content-center mx-auto">
               <p>
                 Although you can edit your widget settings in the settings
-                window of the widget
+                window of the widget, you can also modify the possible selection
+                of pusheens and their texts here. Down below you can see the
+                default selection of pusheens and their texts, you can
+                add/remvoe them at will.
+                <br />
+                <br />
+                Setting the <code><b>text</b></code> value empty will result in
+                only showing the gif image you set in the imgUrl property.
+                <br />
+                <br />
+                Please remember that sticker gifs work the best for this widget
+                as they offer a trasparent background. You can find some nice
+                ones
+                <a
+                  target="_blank"
+                  href="https://giphy.com/search/pusheen-stickers"
+                  >here</a
+                >.
               </p>
+
+              <div class="alert alert-danger" role="alert">
+                You can find the <code> randomPusheens.json</code> file of your
+                widget in
+                <code>C:\Users\USER\AppData\Roaming\pusheen\storage</code>
+              </div>
+
               <label for="settings-editor" class="form-label"
                 ><b>Default Pusheen Settings</b></label
               >
@@ -211,7 +241,12 @@
                 id="settings-editor"
                 rows="25"
               ></textarea>
-              <button class="btn btn-primary w-100 mt-4 px-3">Download randomPusheens.json</button>
+              <a
+                onclick="downloadFile()"
+                id="download"
+                class="btn btn-primary w-100 mt-4 px-3"
+                >Download randomPusheens.json</a
+              >
             </div>
           </div>
         </div>

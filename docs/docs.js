@@ -92,3 +92,17 @@ document.getElementById("settings-editor").innerHTML = JSON.stringify(
   null,
   4
 );
+
+function downloadFile() {
+  var dataStr =
+    "data:text/json;charset=utf-8," +
+    encodeURIComponent(
+      JSON.stringify(
+        JSON.parse(document.getElementById("settings-editor").value)
+      )
+    );
+  var dlAnchorElem = document.getElementById("download");
+  dlAnchorElem.setAttribute("href", dataStr);
+  dlAnchorElem.setAttribute("download", "randomPuseens.json");
+  //dlAnchorElem.click();
+}

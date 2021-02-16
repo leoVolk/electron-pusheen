@@ -16,11 +16,11 @@ nav {
 }
 
 .nav-link:hover {
-  color: #ffeeed !important;
+  color: #ebb7be !important;
 }
 
 a:hover {
-  color: #ffeeed !important;
+  color: #ebb7be !important;
 }
 
 .navbar-bg {
@@ -83,4 +83,18 @@ h2 {
 
 textarea {
   background-color: #fafafa;
+}
+
+.btn {
+  background-color: #ebb7be !important;
+  border: none;
+}
+
+.btn:hover {
+  background-color: #ffeeed !important;
+  color: #50342b !important;
+}
+
+section {
+  margin: 64px 0px ;
 }
