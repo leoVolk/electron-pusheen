@@ -1,4 +1,4 @@
-console.log("Hello World");
+console.log("Made with ❤️ by Leo");
 
 window.onscroll = function () {
   scrollListener();
