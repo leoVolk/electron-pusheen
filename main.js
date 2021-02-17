@@ -11,14 +11,29 @@ try {
 
 let tray = null;
 let mainWindow = null;
+let factsPusheenWindow = null;
 
+function init() {
+  createMainWindow();
+}
 
 function createMainWindow() {
   tray = new Tray(path.join(__dirname, "/src/assets/logo.png"));
 
-  // Create the browser window.
   mainWindow = createBrowserWindow(400, 200);
+  factsPusheenWindow = createBrowserWindow(400, 300);
 
+  initTray();
+
+  mainWindow.loadFile("index.html");
+  factsPusheenWindow.loadFile("./src/views/factsPusheen.html");
+}
+
+if (process.platform === "darwin") {
+  app.dock.hide();
+}
+
+function initTray() {
   const contextMenu = Menu.buildFromTemplate([
     { label: "pusheen" },
     { type: "separator" },
@@ -27,26 +42,29 @@ function createMainWindow() {
       type: "checkbox",
       checked: mainWindow.isVisible(),
       click: function () {
-        if (mainWindow.isVisible()) {
-          mainWindow.hide();
-        } else {
-          mainWindow.show();
-        }
+        handleWindowVisibility(mainWindow, "index.html");
+      },
+    },
+    {
+      label: "Facts",
+      type: "checkbox",
+      checked: factsPusheenWindow.isVisible(),
+      click: function () {
+        handleWindowVisibility(
+          factsPusheenWindow,
+          "./src/views/factsPusheen.html"
+        );
       },
     },
     { type: "separator" },
-    {
+    /*     {
       label: "Settings",
       type: "checkbox",
       checked: mainWindow.isVisible(),
       click: function () {
-        if (mainWindow.isVisible()) {
-          mainWindow.hide();
-        } else {
-          mainWindow.show();
-        }
+        handleWindowVisibility(mainWindow, "");
       },
-    },
+    }, */
     {
       label: "Quit",
       click: function () {
@@ -56,18 +74,12 @@ function createMainWindow() {
   ]);
   tray.setToolTip("Pusheen!");
   tray.setContextMenu(contextMenu);
-
-  mainWindow.loadFile("index.html");
-}
-
-if (process.platform === "darwin") {
-  app.dock.hide();
 }
 
 app.whenReady().then(() => {
-  createMainWindow();
+  init();
   app.on("activate", function () {
-    if (BrowserWindow.getAllWindows().length === 0) createMainWindow();
+    if (BrowserWindow.getAllWindows().length === 0) init();
   });
 });
 
@@ -78,3 +90,16 @@ app.setLoginItemSettings({
 app.on("window-all-closed", function () {
   if (process.platform !== "darwin") app.quit();
 });
+
+function handleWindowVisibility(w, fallbackView) {
+  if (w) {
+    if (w.isVisible()) {
+      w.hide();
+    } else {
+      w.show();
+    }
+  } else {
+    w = createBrowserWindow(400, 200);
+    w.loadFile(fallbackView);
+  }
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html style="-webkit-app-region: drag">
+  <head>
+    <link
+      rel="stylesheet"
+      href="../../node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../src/assets/style/main.css" />
+
+    <meta charset="UTF-8" />
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src * self blob: data: gap:; style-src * self 'unsafe-inline' blob: data: gap:; script-src * 'self' 'unsafe-eval' 'unsafe-inline' blob: data: gap:; object-src * 'self' blob: data: gap:; img-src * self 'unsafe-inline' blob: data: gap:; connect-src self * 'unsafe-inline' blob: data: gap:; frame-src * self blob: data: gap:;"
+    />
+  </head>
+
+  <body>
+    <div onclick="getRandomFact()" class="container">
+      <div class="row justify-content-center">
+        <div class="col-6">
+          <img
+            id="pusheen"
+            src="https://media0.giphy.com/media/mG2pJcdFjjePzeHmVi/giphy.gif"
+            class="pusheen"
+            width="100%"
+          />
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <div id="speech-bubble" class="speech-top">Loading facts...</div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../scripts/renderer.js"></script>
+    <script src="../scripts/factsPusheen.js"></script>
+  </body>
+</html>

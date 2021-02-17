@@ -1,5 +1,7 @@
 body {
   background: transparent !important;
+  max-height: 100%;
+  overflow-y: hidden;
 }
 
 .hidden {
@@ -40,7 +42,6 @@ img.pusheen {
 }
 
 .speech::before {
-  
   content: "";
   position: absolute;
   top: 20px;
@@ -82,4 +83,24 @@ img.pusheen {
   100% {
     opacity: 1;
   }
+}
+
+.speech-top {
+  overflow-y: auto;
+  position: relative;
+  background-color: wheat;
+  padding: 4px 8px 4px 8px;
+  border-radius: 5px;
+}
+
+.speech-top::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  bottom: 100%;
+  left: 50%;
+  border: 0.75rem solid transparent;
+  border-top: none;
+  border-bottom-color: wheat;
 }

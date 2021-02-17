@@ -3,8 +3,9 @@ const isDev = require("electron-is-dev");
 const path = require("path");
 
 module.exports = {
-  createBrowserWindow: function (w, h, x = 0, y = 0) {
+  createBrowserWindow: function (w, h, x = 0, y = 0, useCS) {
     let window = new BrowserWindow({
+      useContentSize: useCS,
       width: w,
       height: h,
       webPreferences: {
