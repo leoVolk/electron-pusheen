@@ -22,6 +22,7 @@ function createMainWindow() {
 
   mainWindow = createBrowserWindow(400, 200);
   factsPusheenWindow = createBrowserWindow(400, 300);
+  factsPusheenWindow.hide();
 
   initTray();
 
@@ -57,7 +58,7 @@ function initTray() {
       },
     },
     { type: "separator" },
-    /*     {
+    /* {
       label: "Settings",
       type: "checkbox",
       checked: mainWindow.isVisible(),

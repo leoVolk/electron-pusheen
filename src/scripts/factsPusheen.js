@@ -1,7 +1,7 @@
 const { default: axios } = require("axios");
 
 var speechBubble = document.getElementById("speech-bubble");
-getRandomFact();
+//getRandomFact();
 function getRandomFact() {
   console.log("Getting new one");
   axios
