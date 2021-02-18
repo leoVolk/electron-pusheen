@@ -28,10 +28,24 @@ module.exports = {
     });
 
     if (isDev) {
+      //window.webContents.openDevTools({ mode: "detach" });
+    }
+
+    return window;
+  },
+  createSettingsWindow: function () {
+    let window = new BrowserWindow({
+      icon: path.join(__dirname, "/src/assets/logo.png"),
+      webPreferences: {
+        nodeIntegration: true,
+        enableRemoteModule: true,
+      },
+    });
+
+    if (isDev) {
       window.webContents.openDevTools({ mode: "detach" });
     }
 
     return window;
   },
-  createSettingsWindow: function () {},
 };

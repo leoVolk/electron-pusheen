@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html style="overflow-y: auto">
+  <head>
+    <link
+      rel="stylesheet"
+      href="../../node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../src/assets/style/main.css" />
+
+    <meta charset="UTF-8" />
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src * self blob: data: gap:; style-src * self 'unsafe-inline' blob: data: gap:; script-src * 'self' 'unsafe-eval' 'unsafe-inline' blob: data: gap:; object-src * 'self' blob: data: gap:; img-src * self 'unsafe-inline' blob: data: gap:; connect-src self * 'unsafe-inline' blob: data: gap:; frame-src * self blob: data: gap:;"
+    />
+  </head>
+
+  <body>
+    <div class="container pb-5">
+      <div class="row">
+        <div class="col-12 mt-5">
+          <h1 class="text-center">Settings</h1>
+        </div>
+        <div class="col-12">
+          <div class="row">
+            <div class="col-12"></div>
+          </div>
+
+          <div class="row my-5">
+            <div class="col-12">
+              <div class="card shadow">
+                <div class="card-header"><b>Application Settings</b></div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-6">
+                      <label for="window-height" class="form-label"
+                        >Window height</label
+                      >
+                      <input
+                        id="window-height"
+                        type="number"
+                        class="w-100 form-control"
+                      />
+                    </div>
+                    <div class="col-6">
+                      <label for="window-width" class="form-label"
+                        >Window width</label
+                      >
+                      <input
+                        id="window-width"
+                        type="number"
+                        class="w-100 form-control"
+                      />
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <button
+                        class="btn btn-primary my-3 w-100"
+                        onclick="onApplicationSettingsSave()"
+                      >
+                        Save Application Settings
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row my-5">
+            <div class="col-12">
+              <div class="card shadow">
+                <div class="card-header"><b>Default Pusheen Settings</b></div>
+                <div class="card-body">
+                  <div class="col-12 align-content-center">
+                    <p>
+                      Here you can set the pusheens that will be shown by the
+                      default widget window.
+                      <code><b>imgUrl</b></code> links to the image that you
+                      want to be shown, while <code><b>text</b></code> will be
+                      what pusheen says to you.
+                      <br />
+                      <br />
+                      Setting the <code><b>text</b></code> value empty will
+                      result in only showing the gif image you set in the imgUrl
+                      property.
+                      <br />
+                      <br />
+                      Please remember that sticker gifs work the best for this
+                      widget as they offer a trasparent background. You can find
+                      some nice ones
+                      <a
+                        target="_blank"
+                        href="https://giphy.com/search/pusheen-stickers"
+                        ><b>here</b></a
+                      >.
+                    </p>
+
+                    <div class="alert alert-danger" role="alert">
+                      You can find the
+                      <code> <b> randomPusheens.json </b></code> file of your
+                      widget in
+                      <code
+                        ><b
+                          >C:\Users\USER\AppData\Roaming\pusheen\storage</b
+                        ></code
+                      >
+                    </div>
+
+                    <label for="settings-editor" class="form-label"
+                      ><b>Default Pusheen Settings</b></label
+                    >
+                    <textarea
+                      class="form-control"
+                      style="white-space: nowrap"
+                      id="randomPusheens-setting"
+                      rows="10"
+                    ></textarea>
+                    <a
+                      onclick="downloadFile()"
+                      id="download"
+                      class="btn btn-primary w-100 mt-4 px-3"
+                      >Save randomPusheens</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../scripts/settings.js"></script>
+    <script src="../scripts/factsPusheen.js"></script>
+  </body>
+</html>

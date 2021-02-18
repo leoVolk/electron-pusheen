@@ -3,10 +3,6 @@ var speechBubble = document.getElementById("speech-bubble");
 var pusheenImg = document.getElementById("pusheen");
 var pusheens;
 
-storage.clear(function (error) {
-  if (error) throw error;
-});
-
 setPusheen = (pusheen) => {
   if (!pusheen) return;
 
@@ -98,7 +94,6 @@ const randomPusheens = [
   },
 ];
 
-
 //TODO: rewrite to async
 // storage.get().then()
 function getPusheensFromStorage() {
@@ -125,4 +120,3 @@ function getPusheensFromStorage() {
 }
 
 getPusheensFromStorage();
-

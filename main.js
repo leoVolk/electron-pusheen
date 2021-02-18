@@ -3,7 +3,10 @@ const { app, BrowserWindow, Tray, Menu, ipcMain } = require("electron");
 const { electron } = require("process");
 const { ipcRenderer } = require("electron");
 const storage = require("electron-json-storage");
-const { createBrowserWindow } = require("./src/scripts/utils");
+const {
+  createBrowserWindow,
+  createSettingsWindow,
+} = require("./src/scripts/utils");
 
 try {
   require("electron-reloader")(module);
@@ -12,6 +15,7 @@ try {
 let tray = null;
 let mainWindow = null;
 let factsPusheenWindow = null;
+let settingsWindow = null;
 
 function init() {
   createMainWindow();
@@ -20,14 +24,9 @@ function init() {
 function createMainWindow() {
   tray = new Tray(path.join(__dirname, "/src/assets/logo.png"));
 
-  mainWindow = createBrowserWindow(400, 200);
-  factsPusheenWindow = createBrowserWindow(400, 300);
-  factsPusheenWindow.hide();
+  assignWindowDefaults();
 
   initTray();
-
-  mainWindow.loadFile("index.html");
-  factsPusheenWindow.loadFile("./src/views/factsPusheen.html");
 }
 
 if (process.platform === "darwin") {
@@ -58,14 +57,14 @@ function initTray() {
       },
     },
     { type: "separator" },
-    /* {
+    {
       label: "Settings",
       type: "checkbox",
-      checked: mainWindow.isVisible(),
+      checked: settingsWindow.isVisible(),
       click: function () {
-        handleWindowVisibility(mainWindow, "");
+        handleWindowVisibility(settingsWindow, "./src/views/settings.html");
       },
-    }, */
+    },
     {
       label: "Quit",
       click: function () {
@@ -103,4 +102,38 @@ function handleWindowVisibility(w, fallbackView) {
     w = createBrowserWindow(400, 200);
     w.loadFile(fallbackView);
   }
+}
+
+function relaunchApp() {
+  app.relaunch();
+  app.exit();
+}
+
+//there has to be a better way than this...
+function assignWindowDefaults() {
+  mainWindow = createBrowserWindow(256, 128);
+  factsPusheenWindow = createBrowserWindow(256, 200);
+  factsPusheenWindow.hide();
+  mainWindow.hide();
+
+  settingsWindow = createSettingsWindow();
+
+  mainWindow.loadFile("index.html");
+  factsPusheenWindow.loadFile("./src/views/factsPusheen.html");
+  settingsWindow.loadFile("./src/views/settings.html");
+
+  preventClosing(mainWindow);
+  preventClosing(settingsWindow);
+  preventClosing(factsPusheenWindow);
+}
+
+function preventClosing(w) {
+  w.on("close", function (event) {
+    if (!app.isQuiting) {
+      event.preventDefault();
+      w.hide();
+    }
+
+    return false;
+  });
 }
