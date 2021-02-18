@@ -1,7 +1,7 @@
 {
-  "name": "pusheen",
+  "name": "electron-pusheen",
   "version": "0.1.0",
-  "description": "electron pusheen",
+  "description": "An Electron Widget featuring the internets most adorable cat",
   "main": "main.js",
   "author": "Leonhard Volkmann",
   "scripts": {
@@ -25,7 +25,7 @@
     "popper.js": "^1.14.4"
   },
   "build": {
-    "appId": "Electro Pusheen",
+    "appId": "Electron Pusheen",
     "mac": {
       "category": ""
     }
