@@ -17,12 +17,6 @@ $ npm run start
 $ npm run dist
 ```
 
-## Mail Notification
-
-electro-pusheen has a mail notification system which shows a pusheen when you receive a new email.
-To work properly, you need to setup your email and password in the settings window.
-You will also need to configure your mail provider to allow IMAP. It is also possible that you have to grant unauthorized applications access to your inbox.
-
 ## Authors
 
 - **Leonhard Volkmann** - _Initial work & developement_
