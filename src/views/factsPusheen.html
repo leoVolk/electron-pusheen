@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html style="-webkit-app-region: drag; -webkit-user-select: none">
+<html style="-webkit-app-region: drag">
   <head>
     <link
       rel="stylesheet"
       href="../../node_modules/bootstrap/dist/css/bootstrap.min.css"
     />
-    <link rel="stylesheet" href="../assets/style/main.css" />
+    <link rel="stylesheet" href="../../src/assets/style/main.css" />
 
     <meta charset="UTF-8" />
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
@@ -16,18 +16,31 @@
   </head>
 
   <body>
-    <div class="container fade-in">
-      <div class="row">
+    <div onclick="getRandomFact()" class="container">
+      <div class="row justify-content-center">
         <div class="col-6">
-          <div id="speech-bubble" class="speech"></div>
+          <img
+            id="pusheen"
+            src="https://media0.giphy.com/media/mG2pJcdFjjePzeHmVi/giphy.gif"
+            class="pusheen"
+            width="100%"
+          />
         </div>
-        <div class="col-6">
-          <img id="pusheen" class="pusheen" width="100%" src="" />
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <div
+            style="max-height: 50vh; -webkit-app-region: no-drag"
+            id="speech-bubble"
+            class="speech-top"
+          >
+            Loading fact...
+          </div>
         </div>
       </div>
     </div>
 
     <script src="../scripts/renderer.js"></script>
-    <script src="../scripts/randomPusheen.js"></script>
+    <script src="../scripts/factsPusheen.js"></script>
   </body>
 </html>

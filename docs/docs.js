@@ -1,29 +1,7 @@
-const storage = require("electron-json-storage");
-var speechBubble = document.getElementById("speech-bubble");
-var pusheenImg = document.getElementById("pusheen");
-var pusheens;
+console.log("Made with ❤️ by Leo");
 
-storage.clear(function (error) {
-  if (error) throw error;
-});
-
-setPusheen = (pusheen) => {
-  if (!pusheen) return;
-
-  //clearArtifacts();
-
-  if (pusheen.text == "") {
-    speechBubble.parentElement.hidden = true;
-  } else {
-    speechBubble.parentElement.hidden = false;
-  }
-
-  pusheenImg.src = pusheen.imgUrl;
-  speechBubble.innerHTML = pusheen.text;
-};
-
-getRandomFromArray = (arr) => {
-  return arr[~~(arr.length * Math.random())];
+window.onscroll = function () {
+  scrollListener();
 };
 
 const randomPusheens = [
@@ -98,31 +76,33 @@ const randomPusheens = [
   },
 ];
 
-
-//TODO: rewrite to async
-// storage.get().then()
-function getPusheensFromStorage() {
-  storage.get("randomPusheens", function (error, data) {
-    if (error) throw error;
-
-    if (Object.getOwnPropertyNames(data).length === 0) {
-      storage.set("randomPusheens", randomPusheens, function (error) {
-        if (error) throw error;
-      });
-
-      getPusheensFromStorage();
-      return;
-    } else {
-      console.log(data);
-      pusheens = data;
-
-      setPusheen(getRandomFromArray(pusheens));
-      setInterval(function () {
-        setPusheen(getRandomFromArray(pusheens));
-      }, 1000 * 60 * 10);
-    }
-  });
+function scrollListener() {
+  if (
+    document.body.scrollTop > 150 ||
+    document.documentElement.scrollTop > 150
+  ) {
+    document.getElementById("navbar").classList.add("navbar-bg");
+  } else {
+    document.getElementById("navbar").classList.remove("navbar-bg");
+  }
 }
 
-getPusheensFromStorage();
+document.getElementById("settings-editor").innerHTML = JSON.stringify(
+  randomPusheens,
+  null,
+  4
+);
 
+function downloadFile() {
+  var dataStr =
+    "data:text/json;charset=utf-8," +
+    encodeURIComponent(
+      JSON.stringify(
+        JSON.parse(document.getElementById("settings-editor").value)
+      )
+    );
+  var dlAnchorElem = document.getElementById("download");
+  dlAnchorElem.setAttribute("href", dataStr);
+  dlAnchorElem.setAttribute("download", "randomPuseens.json");
+  //dlAnchorElem.click();
+}
