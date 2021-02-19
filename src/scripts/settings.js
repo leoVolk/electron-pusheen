@@ -46,7 +46,6 @@ getApplicationSettings();
 getPusheensFromStorage();
 
 function onApplicationSettingsSave() {
-  console.log("saving...");
   applicationSettings.windowHeight = document.querySelector(
     "#window-height"
   ).value;
@@ -59,7 +58,7 @@ function onApplicationSettingsSave() {
     if (error) throw error;
   });
 
-  getApplicationSettings();
+  //getApplicationSettings();
 }
 
 function onApplicationSettingLoad() {

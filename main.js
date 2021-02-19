@@ -2,7 +2,14 @@ const path = require("path");
 const { app, BrowserWindow, Tray, Menu, ipcMain } = require("electron");
 const { electron } = require("process");
 const { ipcRenderer } = require("electron");
+
+var { applicationSettings } = path.join(
+  __dirname,
+  "/src/scripts/defaultApplicationSettings.js"
+);
+
 const storage = require("electron-json-storage");
+
 const {
   createBrowserWindow,
   createSettingsWindow,
@@ -18,15 +25,23 @@ let factsPusheenWindow = null;
 let settingsWindow = null;
 
 function init() {
-  createMainWindow();
-}
+  storage.get("applicationSettings", function (error, data) {
+    if (error) throw error;
 
-function createMainWindow() {
-  tray = new Tray(path.join(__dirname, "/src/assets/logo.png"));
+    if (Object.getOwnPropertyNames(data).length === 0) {
+      storage.set("applicationSettings", applicationSettings, function (error) {
+        if (error) throw error;
+      });
+    } else {
+      applicationSettings = data;
+    }
 
-  assignWindowDefaults();
+    tray = new Tray(path.join(__dirname, "/src/assets/logo.png"));
 
-  initTray();
+    assignWindowDefaults();
+
+    initTray();
+  });
 }
 
 if (process.platform === "darwin") {
@@ -63,6 +78,12 @@ function initTray() {
       checked: settingsWindow.isVisible(),
       click: function () {
         handleWindowVisibility(settingsWindow, "./src/views/settings.html");
+      },
+    },
+    {
+      label: "Restart",
+      click: function () {
+        relaunchApp();
       },
     },
     {
@@ -111,10 +132,14 @@ function relaunchApp() {
 
 //there has to be a better way than this...
 function assignWindowDefaults() {
-  mainWindow = createBrowserWindow(256, 128);
-  factsPusheenWindow = createBrowserWindow(256, 200);
-  factsPusheenWindow.hide();
-  mainWindow.hide();
+  mainWindow = createBrowserWindow(
+    applicationSettings.windowWidth,
+    applicationSettings.windowHeight
+  );
+  factsPusheenWindow = createBrowserWindow(
+    applicationSettings.windowWidth,
+    applicationSettings.windowHeight
+  );
 
   settingsWindow = createSettingsWindow();
 
@@ -122,9 +147,9 @@ function assignWindowDefaults() {
   factsPusheenWindow.loadFile("./src/views/factsPusheen.html");
   settingsWindow.loadFile("./src/views/settings.html");
 
-  preventClosing(mainWindow);
+  /*   preventClosing(mainWindow);
   preventClosing(settingsWindow);
-  preventClosing(factsPusheenWindow);
+  preventClosing(factsPusheenWindow); */
 }
 
 function preventClosing(w) {
@@ -135,5 +160,22 @@ function preventClosing(w) {
     }
 
     return false;
+  });
+}
+
+function getApplicationSettings() {
+  storage.get("applicationSettings", function (error, data) {
+    if (error) throw error;
+
+    if (Object.getOwnPropertyNames(data).length === 0) {
+      storage.set("applicationSettings", applicationSettings, function (error) {
+        if (error) throw error;
+      });
+
+      getApplicationSettings();
+      return;
+    } else {
+      applicationSettings = data;
+    }
   });
 }

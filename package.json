@@ -1,6 +1,6 @@
 {
   "name": "electron-pusheen",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An Electron Widget featuring the internets most adorable cat",
   "main": "main.js",
   "author": "Leonhard Volkmann",

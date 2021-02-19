@@ -1,3 +1,4 @@
 module.exports = {
-    applicationSettings = { windowWidth: 256, windowHeight: 128 }
-}
+  windowWidth: 256,
+  windowHeight: 128,
+};

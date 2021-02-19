@@ -6,8 +6,8 @@ module.exports = {
   createBrowserWindow: function (w, h, x = 0, y = 0, useCS) {
     let window = new BrowserWindow({
       useContentSize: useCS,
-      width: w,
-      height: h,
+      width: parseInt(w),
+      height: parseInt(h),
       webPreferences: {
         nodeIntegration: true,
         enableRemoteModule: true,
