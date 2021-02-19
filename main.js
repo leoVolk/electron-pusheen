@@ -162,20 +162,3 @@ function preventClosing(w) {
     return false;
   });
 }
-
-function getApplicationSettings() {
-  storage.get("applicationSettings", function (error, data) {
-    if (error) throw error;
-
-    if (Object.getOwnPropertyNames(data).length === 0) {
-      storage.set("applicationSettings", applicationSettings, function (error) {
-        if (error) throw error;
-      });
-
-      getApplicationSettings();
-      return;
-    } else {
-      applicationSettings = data;
-    }
-  });
-}
