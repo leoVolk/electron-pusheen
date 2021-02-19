@@ -140,16 +140,15 @@ function assignWindowDefaults() {
     applicationSettings.windowWidth,
     applicationSettings.windowHeight
   );
-
   settingsWindow = createSettingsWindow();
+
+  factsPusheenWindow.hide();
 
   mainWindow.loadFile("index.html");
   factsPusheenWindow.loadFile("./src/views/factsPusheen.html");
   settingsWindow.loadFile("./src/views/settings.html");
 
-  /*   preventClosing(mainWindow);
-  preventClosing(settingsWindow);
-  preventClosing(factsPusheenWindow); */
+  //preventClosing(settingsWindow);
 }
 
 function preventClosing(w) {
@@ -159,6 +158,6 @@ function preventClosing(w) {
       w.hide();
     }
 
-    return false;
+    return true;
   });
 }
