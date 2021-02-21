@@ -3,18 +3,8 @@ const storage = require("electron-json-storage");
 const randomPuseensTextarea = document.getElementById("randomPusheens-setting");
 var { applicationSettings } = path.join(
   __dirname,
-  "/src/scripts/defaultApplicationSettings.js"
+  "/src/store/defaultApplicationSettings.js"
 );
-
-function downloadFile() {
-  var dataStr =
-    "data:text/json;charset=utf-8," +
-    encodeURIComponent(JSON.stringify(JSON.parse(randomPuseensTextarea.value)));
-  var dlAnchorElem = document.getElementById("download");
-  dlAnchorElem.setAttribute("href", dataStr);
-  dlAnchorElem.setAttribute("download", "randomPuseens.json");
-  //dlAnchorElem.click();
-}
 
 function getPusheensFromStorage() {
   storage.get("randomPusheens", function (error, data) {
@@ -22,6 +12,19 @@ function getPusheensFromStorage() {
 
     randomPuseensTextarea.innerHTML = JSON.stringify(data, null, 4);
   });
+}
+
+function onDefaultPusheenSettingsSave() {
+  console.log("saving...");
+  storage.set(
+    "randomPusheens",
+    JSON.parse(randomPuseensTextarea.value),
+    function (error) {
+      if (error) throw error;
+
+      getPusheensFromStorage();
+    }
+  );
 }
 
 function getApplicationSettings() {
@@ -58,7 +61,7 @@ function onApplicationSettingsSave() {
     if (error) throw error;
   });
 
-  //getApplicationSettings();
+  getApplicationSettings();
 }
 
 function onApplicationSettingLoad() {

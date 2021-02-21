@@ -28,7 +28,7 @@ module.exports = {
     });
 
     if (isDev) {
-      window.webContents.openDevTools({ mode: "detach" });
+      //window.webContents.openDevTools({ mode: "detach" });
     }
 
     return window;

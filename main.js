@@ -5,7 +5,7 @@ const { ipcRenderer } = require("electron");
 
 var { applicationSettings } = path.join(
   __dirname,
-  "/src/scripts/defaultApplicationSettings.js"
+  "/src/store/defaultApplicationSettings.js"
 );
 
 const storage = require("electron-json-storage");
