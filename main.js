@@ -80,6 +80,7 @@ function initTray() {
         handleWindowVisibility(settingsWindow, "./src/views/settings.html");
       },
     },
+    { type: "separator" },
     {
       label: "Restart",
       click: function () {
