@@ -2,7 +2,7 @@
 
 A pusheen widget for your desktop! Meow!
 
-[<img src="./src/assets/pusheens/default.gif" width="128"/>](./src/assets/default.gif)
+[<img src="https://raw.githubusercontent.com/leoVolk/electron-pusheen/main/src/assets/default.gif" width="128"/>](./src/assets/default.gif)
 
 ## Setup
 
